@@ -16,9 +16,8 @@ public class ProductEntity {
     private String description;
     private String price;
 
-
-    private List<OrderEntity> listOrder = new ArrayList<>();
-
+    @Transient
+    private List<String> categoryList = new ArrayList<>();
 
     public ProductEntity(){
 
@@ -64,9 +63,6 @@ public class ProductEntity {
     }
 
 
-    public List<OrderEntity> getListOrder() {
-        return listOrder;
-    }
 
     @Override
     public boolean equals(Object o) {

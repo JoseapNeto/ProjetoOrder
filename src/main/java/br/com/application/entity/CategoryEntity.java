@@ -16,7 +16,6 @@ public class CategoryEntity {
 
 
 
-    private  UserEntity user;
 
     public CategoryEntity(){
 
@@ -24,7 +23,7 @@ public class CategoryEntity {
 
     public CategoryEntity(Integer id, String name){
         this.id = id;
-        this.user = user;
+        this.name = name;
 
     }
 
