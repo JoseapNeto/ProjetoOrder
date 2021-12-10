@@ -45,12 +45,15 @@ public class OrderEntity {
     public String getMoment() {
         return moment;
     }
+
     public void setMoment(String name) {
         this.moment = name;
     }
+
     public OrderStatus getStatus() {
         return OrderStatus.valueOf(status);
     }
+
     public void setStatus(OrderStatus status) {
         if(status != null) {
             this.status = status.getCode();
