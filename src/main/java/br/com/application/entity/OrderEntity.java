@@ -1,6 +1,7 @@
 package br.com.application.entity;
 
 
+import br.com.application.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -13,23 +14,22 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String moment;
-    private String status;
+    private int status;
 
-    @JsonIgnore
+
+    //@JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    private UserEntity user;
-
-
+    @JoinColumn(name = "user_id")
+    private  UserEntity user;
 
     public OrderEntity(){
 
     }
 
-    public OrderEntity(Integer id, String moment, String status, UserEntity user){
+    public OrderEntity(Integer id, String moment, OrderStatus status, UserEntity user){
         this.id = id;
         this.moment = moment;
-        this.status = status;
+        setStatus(status);
         this.user = user;
 
     }
@@ -45,26 +45,26 @@ public class OrderEntity {
     public String getMoment() {
         return moment;
     }
-
     public void setMoment(String name) {
         this.moment = name;
     }
-
-    public String getStatus() {
-        return status;
+    public OrderStatus getStatus() {
+        return OrderStatus.valueOf(status);
     }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(OrderStatus status) {
+        if(status != null) {
+            this.status = status.getCode();
+        }
     }
-
     public UserEntity getUser() {
         return user;
     }
-
     public void setUser(UserEntity user) {
         this.user = user;
     }
+
+
+
 
     @Override
     public boolean equals(Object o) {
