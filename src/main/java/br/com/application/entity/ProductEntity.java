@@ -16,8 +16,8 @@ public class ProductEntity {
     private String description;
     private String price;
 
-    @Transient
-    private List<String> categoryList = new ArrayList<>();
+    @ManyToMany(mappedBy = "products")
+    private List<CategoryEntity> categories = new ArrayList<>();
 
     public ProductEntity(){
 
@@ -50,19 +50,21 @@ public class ProductEntity {
         return description;
     }
 
-    public void setEmail(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getPhone() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPhone(String price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-
+    public List<CategoryEntity> getCategories() {
+        return categories;
+    }
 
     @Override
     public boolean equals(Object o) {

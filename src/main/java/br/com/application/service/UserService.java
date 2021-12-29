@@ -26,7 +26,12 @@ public class UserService {
 
 
     public UserEntity insert(UserEntity user){
-        return userRepository.save(user);
+        userRepository.save(user);
+        for(OrderEntity order : user.getListOrder()){
+            order.setUser(user);
+            orderRepository.save(order);
+        }
+        return user;
     }
 
     public List<UserEntity> findAll(){

@@ -4,7 +4,9 @@ package br.com.application.entity;
 import br.com.application.enums.OrderStatus;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class CategoryEntity {
@@ -14,17 +16,20 @@ public class CategoryEntity {
     private Integer id;
     private String name;
 
+    @ManyToMany
+    @JoinTable(name = "category_product",
+    joinColumns = @JoinColumn(name = "category_id"),
+    inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<ProductEntity> products = new HashSet<>();
 
 
 
     public CategoryEntity(){
-
     }
 
     public CategoryEntity(Integer id, String name){
         this.id = id;
         this.name = name;
-
     }
 
     public Integer getId() {
@@ -35,12 +40,16 @@ public class CategoryEntity {
         this.id = id;
     }
 
-    public String getMoment() {
+    public String getName() {
         return name;
     }
 
-    public void setMoment(String name) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<ProductEntity> getProducts() {
+        return products;
     }
 
 

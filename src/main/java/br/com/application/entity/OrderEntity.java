@@ -14,10 +14,10 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String moment;
-    private int status;
+    private Integer status;
 
 
-    //@JsonIgnore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private  UserEntity user;
