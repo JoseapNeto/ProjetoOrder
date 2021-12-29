@@ -24,7 +24,7 @@ public class OrderController {
         return ResponseEntity.ok().body(order);
     }
 
-    @GetMapping(value = "{/id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<OrderEntity> findById(Integer id){
         OrderEntity order = orderService.findById(id);
         return ResponseEntity.ok().body(order);
