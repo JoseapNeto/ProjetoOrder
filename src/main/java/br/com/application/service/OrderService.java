@@ -19,13 +19,14 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    @Autowired
-    UserRepository userRepository;
-
-
 
     public OrderEntity insert(OrderEntity order){
         return orderRepository.save(order);
+    }
+
+    public OrderEntity findById(Integer id){
+        return orderRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Order não encontrada"){});
     }
 
 

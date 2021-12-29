@@ -14,7 +14,7 @@ public class ProductEntity {
     private Integer id;
     private String name;
     private String description;
-    private String price;
+    private Double price;
 
     @ManyToMany(mappedBy = "products")
     private List<CategoryEntity> categories = new ArrayList<>();
@@ -23,7 +23,7 @@ public class ProductEntity {
 
     }
 
-    public ProductEntity(Integer id, String name, String description, String price){
+    public ProductEntity(Integer id, String name, String description, Double price){
         this.id = id;
         this.name = name;
         this.description = description;
@@ -54,11 +54,11 @@ public class ProductEntity {
         this.description = description;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
