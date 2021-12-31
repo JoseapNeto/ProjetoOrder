@@ -31,6 +31,12 @@ public class UserController {
         return ResponseEntity.ok().body(listUser);
     }
 
+    @GetMapping(value = "/{userId/orderId}")
+    public ResponseEntity findUserIdOrderId(@PathVariable Integer userId,
+                                            @PathVariable Integer orderId){
+        return ResponseEntity.ok().body(userService.findUserIdOrderId(userId,orderId));
+    }
+
 
 
 

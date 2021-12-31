@@ -15,10 +15,6 @@ import java.util.List;
 @Service
 public class UserService {
 
-
-
-
-
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -27,10 +23,6 @@ public class UserService {
 
     public UserEntity insert(UserEntity user){
         userRepository.save(user);
-        for(OrderEntity order : user.getListOrder()){
-            order.setUser(user);
-            orderRepository.save(order);
-        }
         return user;
     }
 
@@ -41,6 +33,18 @@ public class UserService {
     public UserEntity findById(Integer userId){
      return userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"cliente nao encontrado"){});
+    }
+
+    public UserEntity findUserIdOrderId(Integer userId, Integer orderId){
+        UserEntity user = findById(userId);
+        OrderEntity order = orderRepository.findById(orderId).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,"Order não encontrada"){});
+        user.getListOrder().add(order);
+        return user;
+    }
+
+    public void delete(Integer id){
+        userRepository.deleteById(id);
     }
 
 

@@ -16,7 +16,10 @@ public class ProductEntity {
     private String description;
     private Double price;
 
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany
+    @JoinTable(name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<CategoryEntity> categories = new ArrayList<>();
 
     public ProductEntity(){

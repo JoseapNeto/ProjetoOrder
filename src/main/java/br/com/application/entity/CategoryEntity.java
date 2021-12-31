@@ -2,6 +2,7 @@ package br.com.application.entity;
 
 
 import br.com.application.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,10 +17,8 @@ public class CategoryEntity {
     private Integer id;
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "category_product",
-    joinColumns = @JoinColumn(name = "category_id"),
-    inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<ProductEntity> products = new HashSet<>();
 
 

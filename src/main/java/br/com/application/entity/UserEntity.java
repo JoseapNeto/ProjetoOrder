@@ -15,7 +15,6 @@ public class UserEntity {
     private String name;
     private String email;
     private String phone;
-
     @OneToMany(mappedBy = "user")
     private List<OrderEntity> listOrder = new ArrayList<>();
 
