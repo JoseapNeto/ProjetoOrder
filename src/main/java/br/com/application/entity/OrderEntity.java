@@ -5,7 +5,9 @@ import br.com.application.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class OrderEntity {
@@ -20,6 +22,9 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private  UserEntity user;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItemEntity> orderItemEntity = new HashSet<>();
 
     public OrderEntity(){
 
@@ -63,6 +68,10 @@ public class OrderEntity {
     }
     public void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    public Set<OrderItemEntity> getItems(){
+        return orderItemEntity;
     }
 
 

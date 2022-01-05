@@ -1,7 +1,8 @@
 package br.com.application.entity;
 
 
-import br.com.application.pk.OrdemItemPk;
+import br.com.application.pk.OrderItemPk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -10,21 +11,25 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order_item")
-public class OrdemItem {
+public class OrderItemEntity {
 
     @EmbeddedId
-    private OrdemItemPk id;
+    private OrderItemPk id =  new OrderItemPk();
     private Integer quantity;
     private Double price;
 
-    public OrdemItem(OrderEntity order, ProductEntity product, Integer quantity, Double price) {
+    public OrderItemEntity(){
+
+    }
+
+    public OrderItemEntity(OrderEntity order, ProductEntity product, Integer quantity, Double price) {
         id.setOrder(order);
         id.setProduct(product);
         this.quantity = quantity;
         this.price = price;
     }
 
-
+    @JsonIgnore
     public OrderEntity getOrder(){
         return id.getOrder();
     }
@@ -63,8 +68,8 @@ public class OrdemItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrdemItem ordemItem = (OrdemItem) o;
-        return id.equals(ordemItem.id);
+        OrderItemEntity orderItemEntity = (OrderItemEntity) o;
+        return id.equals(orderItemEntity.id);
     }
 
     @Override

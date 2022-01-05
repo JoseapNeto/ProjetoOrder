@@ -1,14 +1,8 @@
 package br.com.application.config;
 
 
-import br.com.application.entity.CategoryEntity;
-import br.com.application.entity.OrderEntity;
-import br.com.application.entity.ProductEntity;
-import br.com.application.entity.UserEntity;
-import br.com.application.repository.CategoryRepository;
-import br.com.application.repository.OrderRepository;
-import br.com.application.repository.ProductRepository;
-import br.com.application.repository.UserRepository;
+import br.com.application.entity.*;
+import br.com.application.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +24,8 @@ public class Config implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -63,6 +59,11 @@ public class Config implements CommandLineRunner {
         p5.getCategories().add(cat2);
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 
+        OrderItemEntity oi1 = new OrderItemEntity(o1, p1, 2, p1.getPrice());
+        OrderItemEntity oi2 = new OrderItemEntity(o1, p3, 1, p3.getPrice());
+        OrderItemEntity oi3 = new OrderItemEntity(o2, p3, 2, p3.getPrice());
+        OrderItemEntity oi4 = new OrderItemEntity(o3, p5, 2, p5.getPrice());
+        orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 
 
 
