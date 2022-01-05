@@ -1,6 +1,8 @@
 package br.com.application.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ public class ProductEntity {
     private String description;
     private Double price;
 
+
+    //Muitos pra muitos precisa fazer a criacao da tabela de associaçao
     @ManyToMany
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),

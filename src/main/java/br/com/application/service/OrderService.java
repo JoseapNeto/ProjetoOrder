@@ -25,7 +25,7 @@ public class OrderService {
     }
 
     public OrderEntity findById(Integer id){
-        return orderRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+            return orderRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Order não encontrada"){});
     }
 

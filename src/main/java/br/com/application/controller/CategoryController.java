@@ -32,7 +32,11 @@ public class CategoryController {
         return ResponseEntity.ok().body(listProduct);
     }
 
-
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryEntity> findById(@PathVariable Integer id){
+        CategoryEntity category = categoryService.findById(id);
+        return ResponseEntity.ok().body(category);
+    }
 
 
 }

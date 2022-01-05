@@ -31,10 +31,9 @@ public class UserController {
         return ResponseEntity.ok().body(listUser);
     }
 
-    @GetMapping(value = "/{userId/orderId}")
-    public ResponseEntity findUserIdOrderId(@PathVariable Integer userId,
-                                            @PathVariable Integer orderId){
-        return ResponseEntity.ok().body(userService.findUserIdOrderId(userId,orderId));
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity findUserIdOrderId(@PathVariable Integer userId){
+        return ResponseEntity.ok().body(userService.findById(userId));
     }
 
 

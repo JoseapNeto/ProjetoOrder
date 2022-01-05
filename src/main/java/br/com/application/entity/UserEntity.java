@@ -1,6 +1,8 @@
 package br.com.application.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,8 @@ public class UserEntity {
     private String name;
     private String email;
     private String phone;
+
+
     @OneToMany(mappedBy = "user")
     private List<OrderEntity> listOrder = new ArrayList<>();
 
