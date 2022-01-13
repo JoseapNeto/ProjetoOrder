@@ -18,7 +18,7 @@ public class UserEntity {
     private String email;
     private String phone;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<OrderEntity> listOrder = new ArrayList<>();
 

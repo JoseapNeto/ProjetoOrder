@@ -4,9 +4,7 @@ package br.com.application.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class ProductEntity {
@@ -25,6 +23,9 @@ public class ProductEntity {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<CategoryEntity> categories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItemEntity> orders = new HashSet<>();
 
     public ProductEntity(){
 
@@ -72,6 +73,16 @@ public class ProductEntity {
     public List<CategoryEntity> getCategories() {
         return categories;
     }
+
+    @JsonIgnore
+    public Set<OrderEntity> getOrders(){
+        Set<OrderEntity> ordersItem = new HashSet<>();
+        for(OrderItemEntity items: orders){
+        ordersItem.add(items.getOrder());
+        }
+        return ordersItem;
+    }
+
 
     @Override
     public boolean equals(Object o) {

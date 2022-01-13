@@ -18,13 +18,13 @@ public class OrderEntity {
     private String moment;
     private Integer status;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private  UserEntity user;
 
     @OneToMany(mappedBy = "id.order")
-    private Set<OrderItemEntity> orderItemEntity = new HashSet<>();
+    private Set<OrderItemEntity> orderItem = new HashSet<>();
 
     public OrderEntity(){
 
@@ -71,7 +71,7 @@ public class OrderEntity {
     }
 
     public Set<OrderItemEntity> getItems(){
-        return orderItemEntity;
+        return orderItem;
     }
 
 
