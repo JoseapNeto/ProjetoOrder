@@ -4,8 +4,10 @@ package br.com.application.service;
 import br.com.application.entity.UserEntity;
 import br.com.application.repository.OrderRepository;
 import br.com.application.repository.UserRepository;
-import br.com.application.service.exceptions.UserNotFoundException;
+import br.com.application.service.exceptions.DatabaseException;
+import br.com.application.service.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,31 +32,26 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
-    /*
     public UserEntity findById(Integer userId){
         return userRepository.findById(userId).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND,"cliente nao encontrado"){});
-    }
-*/
-
-    public UserEntity findById(Integer userId){
-        return userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException(userId));
+                new NotFoundException("Usuario não encontrado"));
     }
 
     public void delete(Integer id){
-        userRepository.deleteById(id);
-    }
+        try {
+            userRepository.deleteById(id);
+        }catch(DataIntegrityViolationException e){
+           throw new DatabaseException("Usuario não pode ser excluido, verificar orders pendentes ID: "+id);
+        }
+        }
 
     public UserEntity update(Integer id, UserEntity user){
         UserEntity userEntity = userRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado"){});
+                new NotFoundException("Usuario não encontrado"));
         userEntity.setName(user.getName());
         userEntity.setEmail(user.getEmail());
         userEntity.setPhone(user.getPhone());
         return userRepository.save(userEntity);
-
     }
 
 

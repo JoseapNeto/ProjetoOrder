@@ -29,6 +29,14 @@ public class OrderService {
                 "Order não encontrada"){});
     }
 
+    public void delete(Integer id){
+        try {
+            orderRepository.deleteById(id);
+        }catch(RuntimeException e){
+            e.printStackTrace();
+        }
+    }
+
 
 
 
