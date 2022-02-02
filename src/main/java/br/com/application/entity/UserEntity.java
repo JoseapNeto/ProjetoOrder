@@ -18,7 +18,7 @@ public class UserEntity {
     private String email;
     private String phone;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<OrderEntity> listOrder = new ArrayList<>();
 
@@ -70,6 +70,8 @@ public class UserEntity {
     public List<OrderEntity> getListOrder() {
         return listOrder;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -64,6 +64,7 @@ public class OrderItemEntity {
         this.price = price;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,4 +77,18 @@ public class OrderItemEntity {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
+    public double getSubTotal(){
+        return price * quantity;
+    }
+
+
 }
+
+
+
+
+
+
+

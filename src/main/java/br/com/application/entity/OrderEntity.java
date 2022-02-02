@@ -18,13 +18,16 @@ public class OrderEntity {
     private String moment;
     private Integer status;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private  UserEntity user;
 
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItemEntity> orderItem = new HashSet<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private PaymentEntity payment;
 
     public OrderEntity(){
 
@@ -35,6 +38,7 @@ public class OrderEntity {
         this.moment = moment;
         setStatus(status);
         this.user = user;
+
 
     }
 
@@ -50,8 +54,8 @@ public class OrderEntity {
         return moment;
     }
 
-    public void setMoment(String name) {
-        this.moment = name;
+    public void setMoment(String moment) {
+        this.moment = moment;
     }
 
     public OrderStatus getStatus() {
@@ -70,8 +74,24 @@ public class OrderEntity {
         this.user = user;
     }
 
+    public PaymentEntity getPayment(){
+        return payment;
+    }
+
+    public void setPayment(PaymentEntity payment){
+        this.payment = payment;
+    }
+
     public Set<OrderItemEntity> getItems(){
         return orderItem;
+    }
+
+    public double getTotal(){
+        double total = 0;
+        for(OrderItemEntity orderItemEntity : orderItem){
+            total += orderItemEntity.getSubTotal();
+        }
+        return total;
     }
 
 
@@ -89,4 +109,16 @@ public class OrderEntity {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }

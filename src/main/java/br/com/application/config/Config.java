@@ -45,11 +45,11 @@ public class Config implements CommandLineRunner {
         CategoryEntity cat3 = new CategoryEntity(null, "Computers");
         categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 
-        ProductEntity p1 = new ProductEntity(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet", 10.0);
-        ProductEntity p2 = new ProductEntity(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0);
-        ProductEntity p3 = new ProductEntity(null, "Macbook Pro", "Nam eleifend maximus tortor",  1250.0);
+        ProductEntity p1 = new ProductEntity(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet", 153.8);
+        ProductEntity p2 = new ProductEntity(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.5);
+        ProductEntity p3 = new ProductEntity(null, "Macbook Pro", "Nam eleifend maximus tortor",  1250.2);
         ProductEntity p4 = new ProductEntity(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0);
-        ProductEntity p5 = new ProductEntity(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.0);
+        ProductEntity p5 = new ProductEntity(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 132.1);
 
         p1.getCategories().add(cat2);
         p2.getCategories().add(cat1);
@@ -65,7 +65,9 @@ public class Config implements CommandLineRunner {
         OrderItemEntity oi4 = new OrderItemEntity(o3, p5, 2, p5.getPrice());
         orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 
-
+        PaymentEntity pay1 = new PaymentEntity(null,"29/12/2021",o1);
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
 
 
 
