@@ -18,10 +18,6 @@ public class OrderEntity {
     private String moment;
     private Integer status;
 
-
-
-
-
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -42,9 +38,7 @@ public class OrderEntity {
         this.moment = moment;
         setStatus(status);
         this.user = user;
-
-
-    }
+}
 
     public Integer getId() {
         return id;
@@ -90,17 +84,6 @@ public class OrderEntity {
         return orderItem;
     }
 
-    public double getTotal(){
-        double total = 0;
-        for(OrderItemEntity orderItemEntity : orderItem){
-            total += orderItemEntity.getSubTotal();
-        }
-        return total;
-    }
-
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -112,6 +95,14 @@ public class OrderEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public double getTotal(){
+        double total = 0;
+        for(OrderItemEntity orderItemEntity : orderItem){
+            total += orderItemEntity.getSubTotal();
+        }
+        return total;
     }
 
 

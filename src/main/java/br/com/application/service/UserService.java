@@ -8,6 +8,7 @@ import br.com.application.service.exceptions.DatabaseException;
 import br.com.application.service.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -42,10 +43,12 @@ public class UserService {
             userRepository.deleteById(id);
         }catch(DataIntegrityViolationException e){
            throw new DatabaseException("Usuario não pode ser excluido, verificar orders pendentes ID: "+id);
+        }catch (EmptyResultDataAccessException e){
+            throw new NotFoundException("Usuario não encontrado");
         }
         }
 
-    public UserEntity update(Integer id, UserEntity user){
+        public UserEntity update(Integer id, UserEntity user){
         UserEntity userEntity = userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("Usuario não encontrado"));
         userEntity.setName(user.getName());
@@ -56,3 +59,18 @@ public class UserService {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
