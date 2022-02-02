@@ -18,6 +18,10 @@ public class OrderEntity {
     private String moment;
     private Integer status;
 
+
+
+
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")

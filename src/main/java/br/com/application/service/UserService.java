@@ -1,10 +1,10 @@
 package br.com.application.service;
 
 
-import br.com.application.entity.OrderEntity;
 import br.com.application.entity.UserEntity;
 import br.com.application.repository.OrderRepository;
 import br.com.application.repository.UserRepository;
+import br.com.application.service.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,23 +30,32 @@ public class UserService {
         return userRepository.findAll();
     }
 
+
+    /*
     public UserEntity findById(Integer userId){
-     return userRepository.findById(userId).orElseThrow(() ->
+        return userRepository.findById(userId).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"cliente nao encontrado"){});
     }
+*/
 
-    public UserEntity findUserIdOrderId(Integer userId, Integer orderId){
-        UserEntity user = findById(userId);
-        OrderEntity order = orderRepository.findById(orderId).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND,"Order não encontrada"){});
-        user.getListOrder().add(order);
-        return user;
+    public UserEntity findById(Integer userId){
+        return userRepository.findById(userId).orElseThrow(() ->
+                new UserNotFoundException(userId));
     }
 
     public void delete(Integer id){
         userRepository.deleteById(id);
     }
 
+    public UserEntity update(Integer id, UserEntity user){
+        UserEntity userEntity = userRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado"){});
+        userEntity.setName(user.getName());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setPhone(user.getPhone());
+        return userRepository.save(userEntity);
+
+    }
 
 
 }
