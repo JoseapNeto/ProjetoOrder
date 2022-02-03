@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class CategoryEntity implements Serializable {
+public class CategoryEntity  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

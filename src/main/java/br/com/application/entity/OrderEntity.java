@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class OrderEntity implements Serializable {
+public class OrderEntity  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
