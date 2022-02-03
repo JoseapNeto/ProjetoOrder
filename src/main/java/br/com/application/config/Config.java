@@ -8,12 +8,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.beans.Transient;
 import java.util.Arrays;
 
 import static br.com.application.enums.OrderStatus.*;
 
+
+
 @Configuration
-@Profile("dev")
+@Profile("prod")
 public class Config implements CommandLineRunner {
 
     @Autowired
@@ -27,9 +30,11 @@ public class Config implements CommandLineRunner {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-
+    @Transient
     @Override
     public void run(String... args) throws Exception {
+
+
 
         UserEntity u1 = new UserEntity(null, "Jose Neto", "neto@gmail.com", "988888888");
         UserEntity u2 = new UserEntity(null, "Deborah Cristina", "deborah@gmail.com", "977777777");
