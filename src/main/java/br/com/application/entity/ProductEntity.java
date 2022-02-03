@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-public class ProductEntity implements Serializable {
+public class ProductEntity  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
