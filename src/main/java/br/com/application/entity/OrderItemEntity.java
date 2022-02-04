@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order_item")
-public class OrderItemEntity  {
+public class OrderItemEntity implements Serializable {
 
     @EmbeddedId
     private OrderItemPk id =  new OrderItemPk();

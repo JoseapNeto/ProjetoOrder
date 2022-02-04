@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class PaymentEntity  {
+public class PaymentEntity implements Serializable {
 
 
     @Id
