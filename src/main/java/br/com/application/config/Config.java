@@ -17,7 +17,7 @@ import static br.com.application.enums.OrderStatus.*;
 
 
 @Configuration
-@Profile("dev")
+@Profile("prod")
 public class Config implements CommandLineRunner {
 
     @Autowired
